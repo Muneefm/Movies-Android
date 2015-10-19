@@ -470,22 +470,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@color/switch_thumb_normal_material_dark"
                     android:layout_height="wrap_content">
-                    <com.gc.materialdesign.views.ButtonFlat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Visit Movie Home Page"
-                        android:textColor="@color/blue500"
-                        android:id="@+id/visit"
-                        />
 
-                    <com.gc.materialdesign.views.ButtonFlat
-                        android:id="@+id/review"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/visit"
-                        android:layout_marginBottom="30dp"
-                        android:background="#1E88E5"
-                        android:text="Read Reviews" />
                 </RelativeLayout>
                 <!--  <TextView
                       android:id="@+id/body"

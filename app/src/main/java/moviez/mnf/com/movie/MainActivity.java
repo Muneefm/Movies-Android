@@ -91,27 +91,28 @@ Toolbar toolbar;
         mToolbarView = findViewById(R.id.toolbar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-       getSupportActionBar().setDisplayShowHomeEnabled(true);
-    //    pager = (ViewPager) findViewById(R.id.pager);
-      //      mPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, 4);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        //    mPagerAdapterTv = new ViewPagerAdapterTv(getSupportFragmentManager(), TitlesTv, 4);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+
+        pager = (ViewPager) findViewById(R.id.pager);
+            mPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, 4);
+
+            mPagerAdapterTv = new ViewPagerAdapterTv(getSupportFragmentManager(), TitlesTv, 4);
    //         pager.setAdapter(mPagerAdapterTv);
-        //pager.setAdapter(mPagerAdapter);
+        pager.setAdapter(mPagerAdapter);
 
-
+        tabLayout.setupWithViewPager(pager);
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 decorView.setSystemUiVisibility(uiOptions);
             }
         });
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
 
 
        // slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
@@ -119,9 +120,9 @@ Toolbar toolbar;
 
         /// Drawer
 
-        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_frag);
+        /*NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_frag);
 
-        drawerFragment.setUp(R.id.navigation_frag, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
+        drawerFragment.setUp(R.id.navigation_frag, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);*/
 
     /*    slidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override

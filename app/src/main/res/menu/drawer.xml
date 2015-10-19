@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/header"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/home"
+            android:checked="false"
+            android:title="Dashboard"/>
+
+        <item
+            android:id="@+id/orders"
+            android:checked="false"
+            android:title="Orders" />
+
+        <item
+            android:id="@+id/product"
+            android:checked="false"
+            android:title="Products" />
+
+
+      <!--  <item
+            android:id="@+id/trash"
+            android:checked="false"
+            android:icon="@drawable/ic_drawer"
+            android:title="test"/>-->
+
+<!--
+        <item
+            android:id="@+id/spam"
+            android:checked="false"
+            android:icon="@drawable/ic_drawer"
+            android:title="Seventh" />
+-->
+    </group>
+
+
+</menu>

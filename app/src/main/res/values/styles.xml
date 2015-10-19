@@ -10,7 +10,7 @@
 
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primaryDark</item>
-        <item name="colorAccent">@color/accent</item>
+        <item name="colorAccent">@color/white</item>
     </style>
     <style name="TertiaryButton">
         <item name="android:background">@drawable/tertiary_button</item>
@@ -24,4 +24,13 @@
         <item name="cpb_sweep_speed">@string/cpb_default_sweep_speed</item>
         <item name="cpb_rotation_speed">@string/cpb_default_rotation_speed</item>
     </style>
+
+    <style name="nav" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorPrimaryDark">@color/teal800</item>
+        <item name="colorControlNormal">@color/grey200</item>
+        <item name="colorPrimary">@color/pink400</item>
+        <item name="colorPrimaryDark">@color/pink500</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+
 </resources>
