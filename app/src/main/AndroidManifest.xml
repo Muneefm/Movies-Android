@@ -47,8 +47,13 @@
         </activity>
         <activity
             android:name=".Activity.YouTubeActivity"
-            android:theme="@style/Theme.AppCompat.Dialog"
-            android:label="@string/title_activity_you_tube" >
+            android:label="@string/title_activity_you_tube"
+            android:theme="@style/Theme.AppCompat.Dialog" >
+        </activity>
+        <activity
+            android:name=".Activity.AuthenticationActivity"
+            android:label="@string/title_activity_authentication"
+            android:theme="@style/AppTheme" >
         </activity>
     </application>
 

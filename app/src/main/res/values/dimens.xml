@@ -5,6 +5,15 @@
 
 
 
+    <!-- paper Button attrs -->
+    <dimen name="paper_text_size">20sp</dimen>
+    <color name="paper_text_color">#60000000</color>
+    <color name="paper_button_color">#ffffffff</color>
+    <color name="paper_button_shadow_color">#000000</color>
+    <dimen name="paper_button_corner_radius">2dp</dimen>
+    <dimen name="paper_padding">7dp</dimen>
+
+
         <dimen name="margin_standard">16dp</dimen>
         <dimen name="margin_short">8dp</dimen>
         <dimen name="margin_extra_short">4dp</dimen>
@@ -25,5 +34,6 @@
         <dimen name="sliding_slop">32dp</dimen>
         <dimen name="sliding_overlay_blur_size">4dp</dimen>
     <dimen name="navigation_drawer_width">280dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
     </resources>
 

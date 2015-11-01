@@ -1,6 +1,7 @@
 package moviez.mnf.com.movie;
 
 import android.content.Intent;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +43,9 @@ Toolbar toolbar;
     SlidingTabLayout slidingTabLayout;
     int Numboftabs =5;
     ViewPager pager;
+    DrawerLayout drawerLayout;
+
+    private NavigationView navigationView;
 
     int kk =1;
     TabLayout tabLayout;
@@ -64,40 +69,41 @@ Toolbar toolbar;
         setContentView(R.layout.activity_main);
         Intent strt = new Intent(MainActivity.this, TvDetailActivity.class);
         //startActivity(strt);
-
-
-
-
         final View decorView = getWindow().getDecorView();
-// Hide both the navigation bar and the status bar.
-// SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
-// a general rule, you should design your app to hide the status bar whenever you
-// hide the navigation bar.
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-
-
-
-
-
-
-
-
-
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClosed) {
 
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+
+                super.onDrawerOpened(drawerView);
+            }
+        };
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
         //mDrawerItmes = getResources().getStringArray(R.array.drawer_titles);
 
         //ViewCompat.setElevation(mHeaderView, getResources().getDimension(R.dimen.toolbar_elevation));
         mToolbarView = findViewById(R.id.toolbar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+       // tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
+       // tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
+       // tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
 
         pager = (ViewPager) findViewById(R.id.pager);
             mPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, 4);
@@ -114,6 +120,39 @@ Toolbar toolbar;
             }
         });
 
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                if (menuItem.isChecked()) menuItem.setChecked(false);
+                else menuItem.setChecked(true);
+
+                //Closing drawer on item click
+                drawerLayout.closeDrawers();
+                // AppController.getInstance().getRequestQueue().stop();
+                if (AppController.getInstance().getRequestQueue() != null) {
+                    Log.e("QUE", "not null");
+                } else {
+                    Log.e("QUE", "null");
+                }
+                switch (menuItem.getItemId()) {
+
+                    case R.id.movieItem:
+                        pager.setAdapter(mPagerAdapter);
+                        tabLayout.setupWithViewPager(pager);
+                        break;
+                    case R.id.seriesItem:
+                        pager.setAdapter(mPagerAdapterTv);
+                        tabLayout.setupWithViewPager(pager);
+                        break;
+                    case R.id.searchItem:
+                        Intent searchIn = new Intent(MainActivity.this, SearchActivity.class);
+                        searchIn.putExtra("key", "1");
+                        startActivity(searchIn);
+                        break;
+                }
+                return true;
+            }
+        });
 
        // slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         //slidingTabLayout.setDistributeEvenly(true);

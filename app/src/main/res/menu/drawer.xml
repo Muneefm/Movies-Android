@@ -6,20 +6,19 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/home"
+            android:id="@+id/movieItem"
             android:checked="false"
-            android:title="Dashboard"/>
+            android:title="Movies"/>
 
         <item
-            android:id="@+id/orders"
+            android:id="@+id/seriesItem"
             android:checked="false"
-            android:title="Orders" />
+            android:title="Series" />
 
         <item
-            android:id="@+id/product"
+            android:id="@+id/searchItem"
             android:checked="false"
-            android:title="Products" />
-
+            android:title="Search" />
 
       <!--  <item
             android:id="@+id/trash"
