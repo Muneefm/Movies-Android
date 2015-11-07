@@ -24,7 +24,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_marginTop="40dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_height="wrap_content">
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
@@ -45,14 +47,14 @@
                 app:met_floatingLabel="highlight"/>
 
             <moviez.mnf.com.movie.UI.PaperButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
             widget:paper_color="@color/teal500"
             android:layout_marginTop="10dp"
             app:paper_text_color="@color/white"
             android:layout_below="@+id/id_password"
             android:layout_alignParentRight="true"
-            widget:paper_text="@string/login"
+            widget:paper_text="Login"
             />
 
         </RelativeLayout>

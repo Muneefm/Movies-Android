@@ -87,8 +87,6 @@
         android:background="@color/teal500"
         android:layout_height="wrap_content"
         android:theme="@style/Toolbar"
-
-
         app:layout_scrollFlags="scroll|enterAlways" />
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"

@@ -24,6 +24,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
+import moviez.mnf.com.movie.Activity.AuthenticationActivity;
 import moviez.mnf.com.movie.Activity.SearchActivity;
 import moviez.mnf.com.movie.Activity.TvDetailActivity;
 import moviez.mnf.com.movie.Adapters.ViewPagerAdapter;
@@ -106,7 +107,7 @@ Toolbar toolbar;
        // tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
 
         pager = (ViewPager) findViewById(R.id.pager);
-            mPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, 4);
+            mPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, 4,1);
 
             mPagerAdapterTv = new ViewPagerAdapterTv(getSupportFragmentManager(), TitlesTv, 4);
    //         pager.setAdapter(mPagerAdapterTv);
@@ -149,6 +150,9 @@ Toolbar toolbar;
                         searchIn.putExtra("key", "1");
                         startActivity(searchIn);
                         break;
+                    case R.id.signIn:
+                        Intent authActivity = new Intent(MainActivity.this, AuthenticationActivity.class);
+                        startActivity(authActivity);
                 }
                 return true;
             }
