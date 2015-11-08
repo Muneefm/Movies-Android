@@ -59,6 +59,7 @@
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 widget:paper_color="@color/teal500"
+                android:id="@+id/sid_register"
                 android:layout_marginTop="10dp"
                 app:paper_text_color="@color/white"
                 android:layout_below="@+id/sid_password"

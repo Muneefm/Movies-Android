@@ -39,21 +39,23 @@
             android:title="Seventh" />
 -->
     </group>
-    <item android:title="Account Settings">
+
 
     <group
         android:id="@+id/acount_group"
         android:checkableBehavior="single"
         >
+        <item android:title="Account Settings">
+
         <item
             android:id="@+id/signIn"
             android:checked="false"
             android:icon="@mipmap/ic_user"
 
             android:title="Sign In" />
+    </item>
 
     </group>
 
-</item>
 
 </menu>

@@ -51,6 +51,7 @@
             android:layout_height="50dp"
             widget:paper_color="@color/teal500"
             android:layout_marginTop="10dp"
+                android:id="@+id/id_login_btn"
             app:paper_text_color="@color/white"
             android:layout_below="@+id/id_password"
             android:layout_alignParentRight="true"
