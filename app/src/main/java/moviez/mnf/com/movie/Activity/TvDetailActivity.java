@@ -52,6 +52,8 @@ import moviez.mnf.com.movie.DataSet.TV.itemDetail.Season;
 import moviez.mnf.com.movie.DataSet.TV.itemDetail.TvItemDet;
 import moviez.mnf.com.movie.DataSet.first.DataMain;
 import moviez.mnf.com.movie.R;
+import moviez.mnf.com.movie.tools.*;
+import moviez.mnf.com.movie.tools.Config;
 
 public class TvDetailActivity extends ActionBarActivity implements ObservableScrollViewCallbacks {
     private View mToolbarView,dividerOne,dividerTwo;
@@ -146,9 +148,9 @@ public class TvDetailActivity extends ActionBarActivity implements ObservableScr
         mParallaxImageHeight = getResources().getDimensionPixelSize(R.dimen.parallax_image_height);
 
 
-        makeJsonArrayRequest("http://api.themoviedb.org/3/tv/"+key+"?api_key=7cf008680165ec352b68dce08866495f");
-        makeJsonImageRequest("http://api.themoviedb.org/3/tv/" + key + "/images?api_key=7cf008680165ec352b68dce08866495f");
-        makeJsonCrewRequest("http://api.themoviedb.org/3/tv/" + key + "/credits?api_key=7cf008680165ec352b68dce08866495f");
+        makeJsonArrayRequest(Config.BASE_URL+"tv/"+key+"?api_key="+Config.API_KEY);
+        makeJsonImageRequest(Config.BASE_URL+"tv/" + key + "/images?api_key=" + Config.API_KEY);
+        makeJsonCrewRequest(Config.BASE_URL+"tv/" + key + "/credits?api_key="+Config.API_KEY);
         im = ImageLoader.getInstance();
         im.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
         File cacheDir = StorageUtils.getCacheDirectory(getApplicationContext(), true);
@@ -280,8 +282,10 @@ public class TvDetailActivity extends ActionBarActivity implements ObservableScr
                     gen.setText(genres.get(0).getName() + " | " + genres.get(1).getName() + " | " + genres.get(2).getName());
                 }
 
-                imPoster.displayImage("http://image.tmdb.org/t/p/w500" + movieDetails.getPosterPath(), mImageView);
-                im.displayImage("http://image.tmdb.org/t/p/w500" + movieDetails.getBackdropPath(), poster);
+               // imPoster.displayImage("http://image.tmdb.org/t/p/w500" + movieDetails.getPosterPath(), mImageView);
+                Utils.loadImage(mImageView,Config.IMAGE_BASE_URL+movieDetails.getPosterPath());
+                //im.displayImage("http://image.tmdb.org/t/p/w500" + movieDetails.getBackdropPath(), poster);
+                Utils.loadImage(poster, Config.IMAGE_BASE_URL + movieDetails.getBackdropPath());
                 mImageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

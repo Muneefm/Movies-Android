@@ -47,4 +47,5 @@ dependencies {
 
     compile 'com.firebase:firebase-client-android:2.4.0+'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

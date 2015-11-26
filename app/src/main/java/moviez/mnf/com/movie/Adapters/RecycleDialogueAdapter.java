@@ -16,6 +16,8 @@ import java.util.List;
 
 import moviez.mnf.com.movie.DataSet.TV.itemDetail.Season;
 import moviez.mnf.com.movie.R;
+import moviez.mnf.com.movie.tools.Config;
+import moviez.mnf.com.movie.tools.Utils;
 
 /**
  * Created by Muneef on 12/05/15.
@@ -89,8 +91,8 @@ public class RecycleDialogueAdapter extends RecyclerView.Adapter<RecycleDialogue
         }
 
         if(seasons.get(position).getPosterPath()!=null){
-            im.displayImage("http://image.tmdb.org/t/p/w500"+seasons.get(position).getPosterPath().toString(), holder.poster);
-
+            //im.displayImage("http://image.tmdb.org/t/p/w500"+seasons.get(position).getPosterPath().toString(), holder.poster);
+            Utils.loadImage(holder.poster, Config.IMAGE_BASE_URL+seasons.get(position).getPosterPath().toString());
         }
 
 

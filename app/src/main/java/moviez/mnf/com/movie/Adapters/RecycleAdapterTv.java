@@ -21,6 +21,8 @@ import java.util.List;
 
 import moviez.mnf.com.movie.Activity.TvDetailActivity;
 import moviez.mnf.com.movie.R;
+import moviez.mnf.com.movie.tools.Config;
+import moviez.mnf.com.movie.tools.Utils;
 
 /**
  * Created by Muneef on 09/05/15.
@@ -90,8 +92,8 @@ public class RecycleAdapterTv extends RecyclerView.Adapter<RecycleAdapterTv.View
         im.init(ImageLoaderConfiguration.createDefault(c));
 
         if(mDataset.get(position).getPosterPath()!=null){
-            im.displayImage("http://image.tmdb.org/t/p/w500" + mDataset.get(position).getPosterPath().toString(), holder.image);
-
+            //im.displayImage("http://image.tmdb.org/t/p/w500" + mDataset.get(position).getPosterPath().toString(), holder.image);
+            Utils.loadImage(holder.image,Config.IMAGE_BASE_URL+mDataset.get(position).getPosterPath().toString());
         }if(mDataset.get(position).getName()!=null){
             holder.text.setText(mDataset.get(position).getName().toString());
         }

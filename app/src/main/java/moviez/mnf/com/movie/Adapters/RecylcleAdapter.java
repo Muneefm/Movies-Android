@@ -24,6 +24,8 @@ import java.util.List;
 import moviez.mnf.com.movie.Activity.MovieDetails;
 import moviez.mnf.com.movie.DataSet.first.Result;
 import moviez.mnf.com.movie.R;
+import moviez.mnf.com.movie.tools.Config;
+import moviez.mnf.com.movie.tools.Utils;
 
 /**
  * Created by Muneef on 03/05/15.
@@ -128,7 +130,8 @@ public class RecylcleAdapter extends RecyclerView.Adapter<RecylcleAdapter.ViewHo
                 holder.dateR.setText(mDataset.get(position).getReleaseDate().toString());
             }
         if(mDataset.get(position).getPosterPath()!=null) {
-            im.displayImage("http://image.tmdb.org/t/p/w500"+mDataset.get(position).getPosterPath().toString(), holder.image);
+           // im.displayImage("http://image.tmdb.org/t/p/w500"+mDataset.get(position).getPosterPath().toString(), holder.image);
+            Utils.loadImage(holder.image, Config.IMAGE_BASE_URL+mDataset.get(position).getPosterPath().toString());
         }
         if(mDataset.get(position).getVoteAverage()!=null){
           Float ra =   mDataset.get(position).getVoteAverage()/2;

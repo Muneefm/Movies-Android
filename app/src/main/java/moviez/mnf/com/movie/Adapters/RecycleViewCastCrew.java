@@ -19,6 +19,8 @@ import java.util.List;
 import moviez.mnf.com.movie.Activity.ImageViewActivity;
 import moviez.mnf.com.movie.DataSet.CastCrew.Cast;
 import moviez.mnf.com.movie.R;
+import moviez.mnf.com.movie.tools.Config;
+import moviez.mnf.com.movie.tools.Utils;
 
 /**
  * Created by Muneef on 05/05/15.
@@ -75,8 +77,8 @@ public class RecycleViewCastCrew extends RecyclerView.Adapter<RecycleViewCastCre
 
         holder.name.setText(mDataset.get(position).getName());
         if(mDataset.get(position).getProfilePath()!=null){
-            im.displayImage("http://image.tmdb.org/t/p/w500" + mDataset.get(position).getProfilePath(), holder.image);
-
+           // im.displayImage("http://image.tmdb.org/t/p/w500" + mDataset.get(position).getProfilePath(), holder.image);
+            Utils.loadImage(holder.image, Config.IMAGE_BASE_URL+mDataset.get(position).getProfilePath());
         }
 
         holder.cv.setOnClickListener(new View.OnClickListener() {

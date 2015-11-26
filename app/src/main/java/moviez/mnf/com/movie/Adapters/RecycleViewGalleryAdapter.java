@@ -20,6 +20,8 @@ import moviez.mnf.com.movie.Activity.ImageViewActivity;
 import moviez.mnf.com.movie.Activity.MovieDetails;
 import moviez.mnf.com.movie.DataSet.Posters.Backdrop;
 import moviez.mnf.com.movie.R;
+import moviez.mnf.com.movie.tools.Config;
+import moviez.mnf.com.movie.tools.Utils;
 
 /**
  * Created by Muneef on 05/05/15.
@@ -77,8 +79,8 @@ public class RecycleViewGalleryAdapter extends RecyclerView.Adapter<RecycleViewG
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        im.displayImage("http://image.tmdb.org/t/p/w500" + mDataset.get(position).getFilePath(), holder.image);
-
+       // im.displayImage("http://image.tmdb.org/t/p/w500" + mDataset.get(position).getFilePath(), holder.image);
+        Utils.loadImage(holder.image, Config.IMAGE_BASE_URL+ mDataset.get(position).getFilePath());
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
