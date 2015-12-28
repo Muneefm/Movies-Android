@@ -5,11 +5,11 @@
     tools:context="moviez.mnf.com.movie.Activity.SearchActivity">
     <!--  <item android:id="@+id/action_settings" android:title="@string/action_settings"
           android:orderInCategory="100" app:showAsAction="never" />
-
+ -->
       <item
-          android:id="@+id/menu_searchid"
+          android:id="@+id/menu_Search"
           android:title="Search"
-          appcompat:actionViewClass="android.support.v7.widget.SearchView"
+          android:icon="@mipmap/ic_search_two"
           appcompat:showAsAction="always"/>
-  -->
+
 </menu>

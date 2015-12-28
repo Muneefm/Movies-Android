@@ -86,7 +86,8 @@ public class FragmentInstance extends Fragment implements ObservableScrollViewCa
         View v= inflater.inflate(R.layout.fragment_fragment_instance, container, false);
         Bundle bundle = getArguments();
         if(bundle.get("position")==0){
-            BaseUrl = "http://api.themoviedb.org/3/movie/top_rated?api_key=7cf008680165ec352b68dce08866495f"; //"http://api.themoviedb.org/3/movie/upcoming?api_key=7cf008680165ec352b68dce08866495f"
+            BaseUrl = "" +
+                    ""; //"http://api.themoviedb.org/3/movie/upcoming?api_key=7cf008680165ec352b68dce08866495f"
         }else if(bundle.get("position")==1){
             BaseUrl = "http://api.themoviedb.org/3/movie/popular?api_key=7cf008680165ec352b68dce08866495f"; //"http://api.themoviedb.org/3/movie/now_playing?api_key=7cf008680165ec352b68dce08866495f"
         }else if(bundle.get("position")==2){

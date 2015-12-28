@@ -28,4 +28,5 @@ Quam libero nulla netus eu porta curae, ut nulla bibendum facilisis et urna sed,
     <string name="drawerOpen">Open Drawer</string>
     <string name="drawerClosed">Drawer Closed</string>
     <string name="title_activity_authentication">AuthenticationActivity</string>
+    <string name="action_search">Search</string>
 </resources>

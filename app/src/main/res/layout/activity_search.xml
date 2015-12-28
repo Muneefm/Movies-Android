@@ -16,7 +16,7 @@
 
 
 
-            <RelativeLayout
+  <!--          <RelativeLayout
                 android:layout_width="match_parent"
                 android:id="@+id/rrrrr"
                 android:layout_height="wrap_content">
@@ -38,7 +38,7 @@
 
 
                     />
-          <!--      <Spinner
+                <Spinner
                     android:layout_width="100dp"
                     android:id="@+id/spinnerS"
                     android:layout_toRightOf="@+id/search"
@@ -48,7 +48,7 @@
 
                 </Spinner>-->
 
-                <ImageButton
+          <!--      <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -58,15 +58,13 @@
                     android:src="@mipmap/ic_search"/>
 
 
-            </RelativeLayout>
+            </RelativeLayout> -->
 
 
 
     </android.support.v7.widget.Toolbar>
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"></ScrollView>
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_below="@+id/toolbar"
@@ -120,6 +118,17 @@
 
 
 </RelativeLayout>
+    <com.quinny898.library.persistentsearch.SearchBox
+        android:id="@+id/searchbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="-6dp"
+        android:layout_marginRight="-6dp"
+        android:layout_marginTop="-6dp"
+        android:visibility="gone" />
+
     <!--  <com.pnikosis.materialishprogress.ProgressWheel
           android:id="@+id/searchp"
           android:layout_width="80dp"

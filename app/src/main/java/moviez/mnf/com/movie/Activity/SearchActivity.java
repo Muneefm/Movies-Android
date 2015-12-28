@@ -1,6 +1,7 @@
 package moviez.mnf.com.movie.Activity;
 
 import android.content.Intent;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -22,10 +23,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
 import com.google.gson.Gson;
+import com.quinny898.library.persistentsearch.SearchBox;
+import com.quinny898.library.persistentsearch.SearchResult;
 
 import org.json.JSONObject;
 
@@ -39,7 +43,10 @@ import moviez.mnf.com.movie.Adapters.RecylcleAdapter;
 import moviez.mnf.com.movie.AppController;
 import moviez.mnf.com.movie.DataSet.TV.list.TvDataList;
 import moviez.mnf.com.movie.DataSet.first.DataMain;
+import moviez.mnf.com.movie.DataSet.first.Result;
 import moviez.mnf.com.movie.R;
+import moviez.mnf.com.movie.tools.*;
+import moviez.mnf.com.movie.tools.Config;
 
 public class SearchActivity extends ActionBarActivity {
 
@@ -48,7 +55,7 @@ public class SearchActivity extends ActionBarActivity {
     CircularProgressBar smothCirSearch;
     public Gson gson = new Gson();
     RecycleAdapterTv adapterTv;
-    EditText search;
+   // EditText search;
     RecylcleAdapter adapter;
     ObservableRecyclerView lv;
     private LinearLayoutManager mLayoutManager;
@@ -57,7 +64,9 @@ public class SearchActivity extends ActionBarActivity {
     SegmentedGroup segmented2;
      String key;
     TextView noRes;
-
+    String TAG ="SA";
+    public SearchBox search;
+    String searchQuer="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +74,13 @@ public class SearchActivity extends ActionBarActivity {
         setContentView(R.layout.activity_search);
         Intent intent = getIntent();
          key = intent.getExtras().getString("key");
+        search = (SearchBox) findViewById(R.id.searchbox);
+        search.enableVoiceRecognition(this);
+        search.setLogoText(getResources().getString(R.string.action_search));
+        openSearch();
         lv = (ObservableRecyclerView) findViewById(R.id.searchResult);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        search = (EditText) findViewById(R.id.search);
+    //    search = (EditText) findViewById(R.id.search);
         smothCirSearch= (CircularProgressBar) findViewById(R.id.smothCirSearch);
         noRes = (TextView) findViewById(R.id.noResSearch);
         setSupportActionBar(toolbar);
@@ -98,6 +111,58 @@ public class SearchActivity extends ActionBarActivity {
             initialiseTv();
 
         }
+        search.setSearchListener(new SearchBox.SearchListener() {
+            @Override
+            public void onSearchOpened() {
+
+            }
+
+            @Override
+            public void onSearchCleared() {
+
+            }
+
+            @Override
+            public void onSearchClosed() {
+
+            }
+
+            @Override
+            public void onSearchTermChanged(String s) {
+            Log.e(TAG,"on search term changed term = "+s);
+                if(s.equals(" ")){
+                    Log.e(TAG,"search space term");
+                }
+                makeSearchResultRequest(s);
+            }
+
+            @Override
+            public void onSearch(String s) {
+                searchQuer = s;
+            Log.e(TAG,"on search q = "+s);
+                if (key.equals("1")) {
+                    //      Toast.makeText(getApplicationContext(),"search one = ys "+search.getText().toString(),Toast.LENGTH_LONG).show();
+                    //String query = URLEncoder.encode("apples oranges", "utf-8");
+                    makeJsonCrewRequest(BaseUrl + Uri.encode(s));
+                } else if (key.equals("2")) {
+                    //    Toast.makeText(getApplicationContext(),"search two = "+search.getText().toString(),Toast.LENGTH_LONG).show();
+                    makeTvSearch(BaseUrltv + Uri.encode(s));
+                }
+
+            }
+
+            @Override
+            public void onResultClick(SearchResult searchResult) {
+
+            }
+        });
+
+        search.setMenuListener(new SearchBox.MenuListener() {
+            @Override
+            public void onMenuClick() {
+                Log.e(TAG,"Menu click");
+            }
+        });
 
         segmented2.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -112,12 +177,12 @@ public class SearchActivity extends ActionBarActivity {
                             key = "1";
 
                             initiliaseMovie();
-                            if (!search.getText().equals("")) {
+                            if (!searchQuer.equals("")) {
                                 Log.e("TAG", "not null");
                                 //Toast.makeText(getApplicationContext(),"this is search not null",Toast.LENGTH_LONG).show();
                                // ((CircularProgressDrawable) smothCirSearch.getIndeterminateDrawable()).start();
 
-                                makeJsonCrewRequest(BaseUrl + Uri.encode(search.getText().toString()));
+                                makeJsonCrewRequest(BaseUrl + Uri.encode(searchQuer.toString()));
                             } else {
                                 Log.e("TAG", "search null");
                             }
@@ -131,12 +196,12 @@ public class SearchActivity extends ActionBarActivity {
                         if (lv.getAdapter() != adapterTv) {
                             key = "2";
                             initialiseTv();
-                            if (!search.getText().equals("")) {
+                            if (!searchQuer.equals("")) {
                                // Toast.makeText(getApplicationContext(), "this is search not null", Toast.LENGTH_LONG).show();
                                 Log.e("TAG", "not null");
 
                                 //((CircularProgressDrawable) smothCirSearch.getIndeterminateDrawable()).start();
-                                makeTvSearch(BaseUrltv + Uri.encode(search.getText().toString()));
+                                makeTvSearch(BaseUrltv + Uri.encode(searchQuer.toString()));
 
                             }
                         }
@@ -148,7 +213,7 @@ public class SearchActivity extends ActionBarActivity {
         });
 
 
-        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+     /*   search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -189,7 +254,7 @@ search.addTextChangedListener(new TextWatcher() {
     }
 });
 
-
+*/
     }
 
 
@@ -219,6 +284,90 @@ search.addTextChangedListener(new TextWatcher() {
 
         lv.setAdapter(adapterTv);
         lv.setLayoutManager(tvlmanager);
+
+    }
+    public void openSearch(){
+        search.revealFromMenuItem(R.id.menu_Search, this);
+
+    }
+    public void closeSearch(){
+        search.hideCircularly(this);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+       // super.onBackPressed();
+        Log.e(TAG, "back press");
+       if(search.getSearchOpen()){
+       closeSearch();
+       }else{
+           super.onBackPressed();
+       }
+
+    }
+
+
+    public void makeSearchResultRequest(String term){
+        AppController.getInstance().cancelPendingRequests("searchTag");
+        String url = Config.BASE_URL+"search/";
+        if (key.equals("1")){
+            url = url+"movie?api_key="+Config.API_KEY;
+        }else if(key.equals("2")){
+            url = url+"tv?api_key="+Config.API_KEY;
+        }
+        url = url+"&query="+ Uri.encode(term);
+        Log.e(TAG, "searchRequest url = " + url);
+        JsonObjectRequest searchResultReq = new JsonObjectRequest(com.android.volley.Request.Method.GET, url, null, new com.android.volley.Response.Listener<JSONObject>() {
+
+
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                Log.e(TAG, "searchRequest on response  ");
+            if(key.equals("1")){
+                DataMain searchFeed;
+                searchFeed = gson.fromJson(jsonObject.toString(), DataMain.class);
+                if (searchFeed.getResults().size() > 5) {
+                    for (int ii = 0; ii < 5; ii++) {
+                        SearchResult option = new SearchResult("" + searchFeed.getResults().get(ii).getTitle(), getResources().getDrawable(R.mipmap.ic_filmblack));
+                        search.addSearchable(option);
+                    }
+                } else {
+                    for (Result res : searchFeed.getResults()) {
+                        SearchResult option = new SearchResult("" + res.getTitle(), getResources().getDrawable(R.mipmap.ic_filmblack));
+                        search.addSearchable(option);
+
+                    }
+                }
+            }else if(key.equals("2")){
+
+                TvDataList searchtvFeed;
+                searchtvFeed = gson.fromJson(jsonObject.toString(), TvDataList.class);
+                if (searchtvFeed.getResults().size() > 5) {
+                    for (int ii = 0; ii < 5; ii++) {
+                        SearchResult option = new SearchResult("" + searchtvFeed.getResults().get(ii).getName(), getResources().getDrawable(R.mipmap.ic_filmblack));
+                        search.addSearchable(option);
+                    }
+                } else {
+                    for (moviez.mnf.com.movie.DataSet.TV.list.Result res : searchtvFeed.getResults()) {
+                        SearchResult option = new SearchResult("" + res.getName(), getResources().getDrawable(R.mipmap.ic_filmblack));
+                        search.addSearchable(option);
+
+                    }
+                }
+
+
+            }
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.e(TAG,"searchRequest on error response  e = "+volleyError.getMessage());
+
+            }
+        });
+        AppController.getInstance().addToRequestQueue(searchResultReq,"searchTag");
 
     }
 
@@ -315,6 +464,7 @@ search.addTextChangedListener(new TextWatcher() {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_search, menu);
+        Log.e(TAG,"oncreate option menu");
 /*
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -355,11 +505,16 @@ search.addTextChangedListener(new TextWatcher() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        Log.e(TAG,"oncreate option item select");
         //noinspection SimplifiableIfStatement
        // if (id == R.id.action_settings) {
          //   return true;
         //}
+        switch (id){
+            case R.id.menu_Search:
+                openSearch();
+                break;
+        }
 
         return super.onOptionsItemSelected(item);
     }
