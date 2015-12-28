@@ -153,7 +153,12 @@ public class SearchActivity extends ActionBarActivity {
 
             @Override
             public void onResultClick(SearchResult searchResult) {
-
+                Log.e(TAG,"inside result click "+searchResult.title);
+                if(key.equals("1")){
+                    makeJsonCrewRequest(BaseUrl + Uri.encode(searchResult.title));
+                }else if(key.equals("2")){
+                    makeTvSearch(BaseUrltv + Uri.encode(searchResult.title));
+                }
             }
         });
 
@@ -168,6 +173,8 @@ public class SearchActivity extends ActionBarActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
+                search.clearSearchable();
+                search.clearResults();
                 switch (checkedId) {
                     case R.id.button21:
                      //   Toast.makeText(getApplicationContext(), "movie Button", Toast.LENGTH_LONG).show();
@@ -331,6 +338,7 @@ search.addTextChangedListener(new TextWatcher() {
                     for (int ii = 0; ii < 5; ii++) {
                         SearchResult option = new SearchResult("" + searchFeed.getResults().get(ii).getTitle(), getResources().getDrawable(R.mipmap.ic_filmblack));
                         search.addSearchable(option);
+
                     }
                 } else {
                     for (Result res : searchFeed.getResults()) {
@@ -398,7 +406,7 @@ search.addTextChangedListener(new TextWatcher() {
                     adapter.reData(feedfirst.getResults());
                 }else if(feedfirst.getTotalResults()==0){
                     noRes.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(), "No Results" , Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getApplicationContext(), "No Results" , Toast.LENGTH_SHORT).show();
 
                     lv.setVisibility(View.INVISIBLE);
                 }
@@ -406,7 +414,7 @@ search.addTextChangedListener(new TextWatcher() {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(getApplicationContext(), "Error  " + volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error  " , Toast.LENGTH_SHORT).show();
                 ((CircularProgressDrawable)smothCirSearch.getIndeterminateDrawable()).progressiveStop();
                 smothCirSearch.setVisibility(View.INVISIBLE);
 
@@ -439,13 +447,13 @@ search.addTextChangedListener(new TextWatcher() {
                 }else if(feedfirst.getTotalResults()==0){
                     noRes.setVisibility(View.VISIBLE);
                     lv.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getApplicationContext(), "Sorry no result  ", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Sorry no result  ", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(getApplicationContext(), "Error  " + volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error  " , Toast.LENGTH_SHORT).show();
                 ((CircularProgressDrawable)smothCirSearch.getIndeterminateDrawable()).progressiveStop();
                 smothCirSearch.setVisibility(View.INVISIBLE);
 
