@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class RecycleViewCastCrew extends RecyclerView.Adapter<RecycleViewCastCre
         List<Cast> mDataset;
     ImageLoader im;
     Context c;
+    String TAG ="RVC";
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public View viewi;
@@ -72,13 +74,16 @@ public class RecycleViewCastCrew extends RecyclerView.Adapter<RecycleViewCastCre
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        im = ImageLoader.getInstance();
-        im.init(ImageLoaderConfiguration.createDefault(c));
+
 
         holder.name.setText(mDataset.get(position).getName());
         if(mDataset.get(position).getProfilePath()!=null){
-           // im.displayImage("http://image.tmdb.org/t/p/w500" + mDataset.get(position).getProfilePath(), holder.image);
-            Utils.loadImage(holder.image, Config.IMAGE_BASE_URL+mDataset.get(position).getProfilePath());
+           Utils.loadImage(holder.image, Config.IMAGE_BASE_URL + mDataset.get(position).getProfilePath());
+            Log.e(TAG,"iamge url  = "+mDataset.get(position).getProfilePath() +" name = "+mDataset.get(position).getName());
+        }else{
+            Utils.loadImage(holder.image, Config.IMAGE_BASE_URL);
+            Log.e(TAG,"iamge url null  = "+mDataset.get(position).getProfilePath() +" name = "+mDataset.get(position).getName());
+
         }
 
         holder.cv.setOnClickListener(new View.OnClickListener() {

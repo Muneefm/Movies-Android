@@ -95,7 +95,7 @@ List<Result> mData;
 
                 @Override
                 public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-                    Toast.makeText(c,"Initialisation Failed",Toast.LENGTH_LONG).show();
+                 //   Toast.makeText(c,"Initialisation Failed",Toast.LENGTH_LONG).show();
                 }
             });
         }

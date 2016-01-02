@@ -97,7 +97,7 @@ public class TvDetailActivity extends ActionBarActivity implements ObservableScr
 
         Intent intent = getIntent();
         String key = intent.getExtras().getString("id");
-        Toast.makeText(getApplication()," key got = "+key,Toast.LENGTH_LONG).show();
+      //  Toast.makeText(getApplication()," key got = "+key,Toast.LENGTH_LONG).show();
         //ID
         titleName = (TextView) findViewById(R.id.nameTV);
         mToolbarView =findViewById(R.id.toolbarTV);

@@ -14,7 +14,7 @@ public class Utils {
         if(url!=null && !url.equals(""))
             Picasso.with(view.getContext())
                     .load(url)
-                    .error(R.mipmap.ic_imgcan)
+                    .error(R.mipmap.ic_cross_grey)
                     .placeholder(R.drawable.dwn)
                     .into(view);
     }

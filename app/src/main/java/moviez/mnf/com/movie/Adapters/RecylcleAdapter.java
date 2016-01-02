@@ -76,7 +76,7 @@ public class RecylcleAdapter extends RecyclerView.Adapter<RecylcleAdapter.ViewHo
 
     public void reData(List<Result> newIt){
         this.mDataset =newIt;
-        Toast.makeText(c, "adapter size "+mDataset.size(), Toast.LENGTH_LONG).show();
+     //   Toast.makeText(c, "adapter size "+mDataset.size(), Toast.LENGTH_LONG).show();
         notifyDataSetChanged();
     }
 
