@@ -1,7 +1,9 @@
 package moviez.mnf.com.movie;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -70,11 +72,29 @@ Toolbar toolbar;
         setContentView(R.layout.activity_main);
         Intent strt = new Intent(MainActivity.this, TvDetailActivity.class);
         //startActivity(strt);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar((toolbar));
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
         final View decorView = getWindow().getDecorView();
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawerOpen, R.string.drawerClosed) {
+      //  setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+                Intent searchIn = new Intent(MainActivity.this, SearchActivity.class);
+                searchIn.putExtra("key", "1");
+                startActivity(searchIn);
+            }
+        });
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawerOpen, R.string.drawerClosed) {
 
 
             @Override
@@ -90,14 +110,13 @@ Toolbar toolbar;
                 super.onDrawerOpened(drawerView);
             }
         };
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        drawer.setDrawerListener(actionBarDrawerToggle);
         //mDrawerItmes = getResources().getStringArray(R.array.drawer_titles);
 
         //ViewCompat.setElevation(mHeaderView, getResources().getDimension(R.dimen.toolbar_elevation));
         mToolbarView = findViewById(R.id.toolbar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);

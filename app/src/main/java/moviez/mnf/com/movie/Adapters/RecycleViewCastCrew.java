@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import moviez.mnf.com.movie.Activity.ImageViewActivity;
+import moviez.mnf.com.movie.Activity.ScrollingActivity;
 import moviez.mnf.com.movie.DataSet.CastCrew.Cast;
 import moviez.mnf.com.movie.R;
 import moviez.mnf.com.movie.tools.Config;
@@ -89,11 +90,11 @@ public class RecycleViewCastCrew extends RecyclerView.Adapter<RecycleViewCastCre
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent str = new Intent(c, ImageViewActivity.class);
+                Intent str = new Intent(c, ScrollingActivity.class);
                 str.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 str.putExtra("id",mDataset.get(position).getId().toString());
-                str.putExtra("key","2");
+             //   str.putExtra("key","2");
                 c.startActivity(str);
             }
         });

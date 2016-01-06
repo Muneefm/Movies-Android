@@ -1,10 +1,19 @@
 <resources>
 
     <!-- Base application theme. -->
+    <style name="AppThemeCast" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorPrimaryDark">@color/teal800</item>
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/white</item>
+    </style>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:colorPrimaryDark">@color/teal800</item>
         <!-- Customize your theme here. -->
+
     </style>
+
     <style name="Toolbar" parent="Theme.AppCompat">
         <item name="android:colorPrimaryDark">@color/teal800</item>
 
@@ -12,10 +21,12 @@
         <item name="colorPrimaryDark">@color/primaryDark</item>
         <item name="colorAccent">@color/white</item>
     </style>
+
     <style name="TertiaryButton">
         <item name="android:background">@drawable/tertiary_button</item>
         <item name="android:textColor">@color/TertiaryTextColor</item>
     </style>
+
     <style name="CircularThemeProgressBar" parent="android:Widget.Holo.ProgressBar">
         <item name="cpb_color">@color/cpb_default_color</item>
         <item name="cpb_stroke_width">@dimen/cpb_default_stroke_width</item>
@@ -32,7 +43,9 @@
         <item name="colorPrimaryDark">@color/pink500</item>
         <item name="colorAccent">@color/accent</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
