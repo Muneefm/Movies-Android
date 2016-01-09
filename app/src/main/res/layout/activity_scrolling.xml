@@ -33,7 +33,11 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay"
                 app:theme="@style/Toolbar"
                 />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
+            </RelativeLayout>
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
@@ -61,4 +65,5 @@
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|start"
         />
+
 </android.support.design.widget.CoordinatorLayout>

@@ -2,9 +2,12 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:wheel="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="80dp"
+    android:paddingTop="0dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="moviez.mnf.com.movie.Activity.ScrollingActivity"
     tools:showIn="@layout/activity_scrolling">
@@ -16,8 +19,24 @@
         android:text="@string/large_text" />-->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:id="@+id/mainRel"
+        android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/namecast"
+        android:text="test"
+        android:paddingLeft="150dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="21dp"
 
+
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/mainRel"
+        android:paddingTop="60dp"
         android:layout_height="match_parent">
 
 <!--        <android.support.v7.widget.CardView
@@ -37,7 +56,7 @@
                 />
         </android.support.v7.widget.CardView> -->
 
-        <TextView
+       <!-- <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -46,15 +65,26 @@
             android:layout_marginTop="12dp"
             android:fontFamily="sans-serif-condensed"
             android:textSize="20dp"
-
-
-            />
-
+            />-->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:cardElevation="1dp"
+            card_view:cardElevation="1dp"
+            app:contentPadding="5dp"
+            card_view:cardUseCompatPadding="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/propick">
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_marginTop="60dp"
             android:id="@+id/primaryContainer"
             android:layout_height="wrap_content">
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TableRow>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -67,21 +97,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/birthTag"
-                android:layout_marginTop="9dp"
                 android:text="test"
 
                 android:textColor="@color/black"
                 android:id="@+id/birthday"
-
                 />
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_marginTop="20dp"
+                    >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Birth PLace: "
+                android:text="Birth Place: "
                 android:visibility="visible"
 
                 android:id="@+id/tagplace"
-                android:layout_marginTop="20dp"
                 android:layout_below="@+id/birthday"
                 android:textColor="@color/blue500"
                 />
@@ -90,26 +123,62 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tagplace"
                 android:id="@+id/place"
-                android:text="test"
+                android:text="testcv"
 
                 android:textColor="@color/black"
-                android:layout_marginTop="9dp"
                 />
 
-        </RelativeLayout>
+                </TableRow>
 
+                <TableRow
+                    android:layout_marginTop="20dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Popularity Score: "
+                        android:visibility="visible"
+
+                        android:id="@+id/tagpopu"
+                        android:layout_below="@+id/birthday"
+                        android:textColor="@color/blue500"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tagplace"
+                        android:id="@+id/popula"
+                        android:text="testcv"
+
+                        android:textColor="@color/black"
+                        />
+
+                </TableRow>
+            </TableLayout>
+        </RelativeLayout>
+</android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            custom:cardElevation="1dp"
+            card_view:cardElevation="1dp"
+            app:contentPadding="5dp"
+            android:layout_below="@+id/propick"
+            card_view:cardUseCompatPadding="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/propickTwo">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/primaryContainer"
             android:layout_height="match_parent">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tagOvr"
                 android:visibility="visible"
-                android:layout_marginLeft="30dp"
-                android:text="Biography :"
+                android:text="About :"
                 android:textColor="@color/blue500"
                 />
 
@@ -117,8 +186,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tagOvr"
-
-                    android:layout_margin="30dp"
                     android:text="tets :"
 
                     android:id="@+id/ovr"
@@ -126,6 +193,20 @@
 
 
         </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.RecyclerView
+
+            android:layout_width="match_parent"
+            android:layout_below="@+id/propickTwo"
+            android:id="@+id/cast_movie_rec"
+            android:visibility="visible"
+            android:background="@color/splashbg"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="15dp"
+            android:layout_height="210dp"/>
+
+
         <fr.castorflex.android.circularprogressbar.CircularProgressBar
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -143,5 +224,5 @@
             android:layout_centerVertical="true"
             />
     </RelativeLayout>
-
+    </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>
