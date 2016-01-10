@@ -61,7 +61,7 @@ Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-
+    DrawerLayout drawer;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mDrawerItmes;
@@ -72,7 +72,7 @@ Toolbar toolbar;
         setContentView(R.layout.activity_main);
         Intent strt = new Intent(MainActivity.this, TvDetailActivity.class);
         //startActivity(strt);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar((toolbar));
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -147,7 +147,7 @@ Toolbar toolbar;
                 else menuItem.setChecked(true);
 
                 //Closing drawer on item click
-                drawerLayout.closeDrawers();
+                drawer.closeDrawers();
                 // AppController.getInstance().getRequestQueue().stop();
                 if (AppController.getInstance().getRequestQueue() != null) {
                     Log.e("QUE", "not null");

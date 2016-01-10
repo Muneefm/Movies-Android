@@ -11,13 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import moviez.mnf.com.movie.Activity.MovieDetails;
-import moviez.mnf.com.movie.DataSet.CastCrew.CastCrewData;
-import moviez.mnf.com.movie.DataSet.CastMovieTv.Cast;
-import moviez.mnf.com.movie.DataSet.movieReview.Result;
+import moviez.mnf.com.movie.Activity.TvDetailActivity;
+import moviez.mnf.com.movie.DataSet.CastMovieTv.tv.Cast;
 import moviez.mnf.com.movie.R;
 import moviez.mnf.com.movie.tools.Config;
 import moviez.mnf.com.movie.tools.Utils;
@@ -25,7 +23,7 @@ import moviez.mnf.com.movie.tools.Utils;
 /**
  * Created by Muneef on 10/01/16.
  */
-public class CastMovieItemRecycleAdapter  extends RecyclerView.Adapter<CastMovieItemRecycleAdapter.ViewHolder>  {
+public class CastTvItemRecycleAdapter  extends RecyclerView.Adapter<CastTvItemRecycleAdapter.ViewHolder>  {
 
     List<Cast> mData;
     Context c;
@@ -48,7 +46,7 @@ public class CastMovieItemRecycleAdapter  extends RecyclerView.Adapter<CastMovie
     }
 
 
-    public CastMovieItemRecycleAdapter(Context mContext,List<Cast> castMvList) {
+    public CastTvItemRecycleAdapter(Context mContext,List<Cast> castMvList) {
         this.c = mContext;
         this.mData = castMvList;
     }
@@ -67,15 +65,15 @@ public class CastMovieItemRecycleAdapter  extends RecyclerView.Adapter<CastMovie
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-        holder.movieName.setText(mData.get(position).getTitle().toString());
+        holder.movieName.setText(mData.get(position).getName().toString());
         Utils.loadImage(holder.posterImage, Config.IMAGE_BASE_URL + mData.get(position).getPosterPath());
         if(!mData.get(position).getCharacter().equals(""))
-        holder.character.setText("as "+mData.get(position).getCharacter().toString());
+            holder.character.setText("as "+mData.get(position).getCharacter().toString());
 
         holder.cView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent str = new Intent(c, MovieDetails.class);
+                Intent str = new Intent(c, TvDetailActivity.class);
                 //str.putextra("your_extra","your_class_value");
                 str.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 str.putExtra("id", mData.get(position).getId().toString());
@@ -87,7 +85,7 @@ public class CastMovieItemRecycleAdapter  extends RecyclerView.Adapter<CastMovie
 
     @Override
     public int getItemCount() {
-        Log.e(TAG,"adapter count = "+mData.size());
+        Log.e(TAG, "adapter count = " + mData.size());
         return mData.size();
     }
 

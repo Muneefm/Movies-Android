@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -26,26 +27,31 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import fr.castorflex.android.circularprogressbar.CircularProgressDrawable;
 import moviez.mnf.com.movie.Adapters.CastMovieItemRecycleAdapter;
+import moviez.mnf.com.movie.Adapters.CastTvItemRecycleAdapter;
 import moviez.mnf.com.movie.AppController;
 import moviez.mnf.com.movie.DataSet.CastDetail.CrewDetailsData;
 import moviez.mnf.com.movie.DataSet.CastMovieTv.CastMovie;
+import moviez.mnf.com.movie.DataSet.CastMovieTv.tv.CastTv;
 import moviez.mnf.com.movie.R;
 import moviez.mnf.com.movie.tools.*;
 import moviez.mnf.com.movie.tools.Config;
 
 public class ScrollingActivity extends AppCompatActivity {
     CircleImageView pro;
-    TextView ovrview,date,place,name;
+    TextView ovrview,date,place,name,popularity;
     CrewDetailsData data;
     CastMovie castMoveData;
+    CastTv castTvData;
     RelativeLayout mainRel;
-    RecyclerView movieRecycle;
+    RecyclerView movieRecycle,tvRecycleView;
     public Gson gson = new Gson();
     ImageView down,share;
     CircularProgressBar smothCirCast;
-    TextView  birthTag,tagplace,tagOvr;
+    TextView  birthTag,tagplace,tagOvr,tagTvRec,tagMovieRec;
     CastMovieItemRecycleAdapter castMoviewAdapter;
-    private LinearLayoutManager mLayoutManager;
+    CastTvItemRecycleAdapter castTvadapter;
+    CardView propickTwo;
+    private LinearLayoutManager mLayoutManager,mLayoutManagerTv;
     static String TAG = "SA";
     Context c;
     @Override
@@ -69,6 +75,10 @@ public class ScrollingActivity extends AppCompatActivity {
         birthTag = (TextView) findViewById(R.id.birthTag);
         tagplace = (TextView) findViewById(R.id.tagplace);
         tagOvr = (TextView) findViewById(R.id.tagOvr);
+        popularity = (TextView) findViewById(R.id.popula);
+
+        tagMovieRec = (TextView) findViewById(R.id.tagMovieRec);
+        tagTvRec = (TextView) findViewById(R.id.tagTvRec);
 
         pro =(CircleImageView) findViewById(R.id.imgpro);
         ovrview = (TextView) findViewById(R.id.ovr);
@@ -78,15 +88,20 @@ public class ScrollingActivity extends AppCompatActivity {
         mainRel = (RelativeLayout) findViewById(R.id.mainRel);
         smothCirCast = (CircularProgressBar) findViewById(R.id.smothCirCast);
         movieRecycle = (RecyclerView) findViewById(R.id.cast_movie_rec);
+        tvRecycleView =(RecyclerView) findViewById(R.id.castTvRec);
+        propickTwo = (CardView) findViewById(R.id.propickTwo);
         mLayoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mLayoutManagerTv
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         movieRecycle.setHasFixedSize(false);
         movieRecycle.setLayoutManager(mLayoutManager);
-
-
+        tvRecycleView.setHasFixedSize(false);
+        tvRecycleView.setLayoutManager(mLayoutManagerTv);
        // makeJsonCrewRequest("http://api.themoviedb.org/3/person/"+key+"?api_key=7cf008680165ec352b68dce08866495f");
         makeJsonCrewRequest(Config.BASE_URL+"person/"+key+"?api_key="+Config.API_KEY);
-        makeJsonCastMovieRequest(Config.BASE_URL+"person/"+key+"/movie_credits"+"?api_key="+Config.API_KEY);
+        makeJsonCastMovieRequest(Config.BASE_URL + "person/" + key + "/movie_credits" + "?api_key=" + Config.API_KEY);
+        makeJsonCastTvRequest(Config.BASE_URL+"person/"+key+"/tv_credits"+"?api_key="+Config.API_KEY);
 
     }
 
@@ -122,6 +137,7 @@ public class ScrollingActivity extends AppCompatActivity {
                     date.setText(data.getBirthday().toString());
                 }
                 if(data.getBiography()!=null&&!data.getBiography().toString().equals("")){
+                    propickTwo.setVisibility(View.VISIBLE);
                     tagOvr.setVisibility(View.VISIBLE);
                     ovrview.setText(data.getBiography().toString());
                 }
@@ -131,6 +147,8 @@ public class ScrollingActivity extends AppCompatActivity {
                 }
                 if(data.getName()!=null){
                     name.setText(data.getName().toString());
+                }if(data.getPopularity()!=null){
+                    popularity.setText(data.getPopularity().toString());
                 }
 
             }
@@ -156,16 +174,60 @@ public class ScrollingActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                Log.e(TAG,"cast moview response succes ");
+                Log.e(TAG, "cast moview response succes ");
 
                 castMoveData = gson.fromJson(response.toString(), CastMovie.class);
+
+                if(castMoveData.getCast().size()>0){
+
+                    tagMovieRec.setVisibility(View.VISIBLE);
+                    movieRecycle.setVisibility(View.VISIBLE);
+
 
                 ((CircularProgressDrawable)smothCirCast.getIndeterminateDrawable()).progressiveStop();
                 smothCirCast.setVisibility(View.INVISIBLE);
 
                 castMoviewAdapter = new CastMovieItemRecycleAdapter(c,castMoveData.getCast());
                 movieRecycle.setAdapter(castMoviewAdapter);
+                }
 
+
+
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(getApplicationContext(), "Error  " + volleyError.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "cast moview response error ");
+                ((CircularProgressDrawable)smothCirCast.getIndeterminateDrawable()).progressiveStop();
+                smothCirCast.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        AppController.getInstance().addToRequestQueue(reqs);
+    }
+
+    public void makeJsonCastTvRequest(String urlc){
+        smothCirCast.setVisibility(View.VISIBLE);
+        Log.e("SA", "cast request url = " + urlc);
+        ((CircularProgressDrawable)smothCirCast.getIndeterminateDrawable()).start();
+        JsonObjectRequest reqs = new JsonObjectRequest(com.android.volley.Request.Method.GET, urlc,null, new com.android.volley.Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+
+                castTvData = gson.fromJson(response.toString(), CastTv.class);
+                if(castTvData.getCast().size()>0) {
+                    tagTvRec.setVisibility(View.VISIBLE);
+                    tvRecycleView.setVisibility(View.VISIBLE);
+
+
+                    ((CircularProgressDrawable) smothCirCast.getIndeterminateDrawable()).progressiveStop();
+                    smothCirCast.setVisibility(View.INVISIBLE);
+
+                    castTvadapter = new CastTvItemRecycleAdapter(c, castTvData.getCast());
+                    tvRecycleView.setAdapter(castTvadapter);
+                }
             }
         }, new com.android.volley.Response.ErrorListener() {
             @Override
