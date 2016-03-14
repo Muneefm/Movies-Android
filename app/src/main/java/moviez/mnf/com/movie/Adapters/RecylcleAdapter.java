@@ -131,7 +131,7 @@ public class RecylcleAdapter extends RecyclerView.Adapter<RecylcleAdapter.ViewHo
             }
         if(mDataset.get(position).getPosterPath()!=null) {
            // im.displayImage("http://image.tmdb.org/t/p/w500"+mDataset.get(position).getPosterPath().toString(), holder.image);
-            Utils.loadImage(holder.image, Config.IMAGE_BASE_URL+mDataset.get(position).getPosterPath().toString());
+            Utils.loadImage(holder.image, mDataset.get(position).getPosterPath().toString(),2);
         }
         if(mDataset.get(position).getVoteAverage()!=null){
           Float ra =   mDataset.get(position).getVoteAverage()/2;

@@ -195,6 +195,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/desc"
         android:padding="9dp"
+        android:textSize="13dp"
         android:textColor="@color/black"
         android:fontFamily="sans-serif-"
 

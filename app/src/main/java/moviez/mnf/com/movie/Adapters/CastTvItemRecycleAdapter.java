@@ -66,7 +66,11 @@ public class CastTvItemRecycleAdapter  extends RecyclerView.Adapter<CastTvItemRe
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.movieName.setText(mData.get(position).getName().toString());
-        Utils.loadImage(holder.posterImage, Config.IMAGE_BASE_URL + mData.get(position).getPosterPath());
+        if(mData.get(position).getPosterPath()!=null) {
+            Utils.loadImage(holder.posterImage, mData.get(position).getPosterPath(), 3);
+        }else{
+            Utils.loadImage(holder.posterImage, "", 3);
+        }
         if(!mData.get(position).getCharacter().equals(""))
             holder.character.setText("as "+mData.get(position).getCharacter().toString());
 

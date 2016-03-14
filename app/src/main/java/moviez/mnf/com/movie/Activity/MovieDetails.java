@@ -61,6 +61,8 @@ import moviez.mnf.com.movie.DataSet.first.DataMain;
 import moviez.mnf.com.movie.DataSet.movieReview.MovieReview;
 import moviez.mnf.com.movie.DataSet.movieReview.Result;
 import moviez.mnf.com.movie.R;
+import moviez.mnf.com.movie.tools.*;
+import moviez.mnf.com.movie.tools.Config;
 
 public class MovieDetails extends ActionBarActivity implements ObservableScrollViewCallbacks{
 
@@ -189,7 +191,7 @@ public class MovieDetails extends ActionBarActivity implements ObservableScrollV
         makeJsonCrewRequest("http://api.themoviedb.org/3/movie/" + key + "/credits?api_key=7cf008680165ec352b68dce08866495f");
         makeJsonReiviewRequest("http://api.themoviedb.org/3/movie/" + key + "/reviews?api_key=7cf008680165ec352b68dce08866495f");
 
-        im = ImageLoader.getInstance();
+    /*    im = ImageLoader.getInstance();
         im.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
         File cacheDir = StorageUtils.getCacheDirectory(getApplicationContext(), true);
 
@@ -221,7 +223,7 @@ public class MovieDetails extends ActionBarActivity implements ObservableScrollV
 
         imPoster = ImageLoader.getInstance();
         imPoster.init(localImageLoaderConfigurationTwo);
-
+*/
 
     }
 
@@ -381,8 +383,10 @@ public class MovieDetails extends ActionBarActivity implements ObservableScrollV
                     gen.setText(genres.get(0).getName()+" | "+genres.get(1).getName()+" | "+genres.get(2).getName());
                 }
 
-                imPoster.displayImage("http://image.tmdb.org/t/p/w500" + movieDetails.getBackdropPath(), mImageView);
-                im.displayImage("http://image.tmdb.org/t/p/w500" + movieDetails.getPosterPath(), poster);
+              //  imPoster.displayImage("http://image.tmdb.org/t/p/w500" + movieDetails.getBackdropPath(), mImageView);
+               // im.displayImage("http://image.tmdb.org/t/p/w500" + movieDetails.getPosterPath(), poster);
+                Utils.loadImage(mImageView, movieDetails.getBackdropPath(),7);
+                Utils.loadImage(poster, movieDetails.getPosterPath(),5);
                 mImageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

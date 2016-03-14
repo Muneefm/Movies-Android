@@ -151,7 +151,7 @@ public class TvDetailActivity extends ActionBarActivity implements ObservableScr
         makeJsonArrayRequest(Config.BASE_URL+"tv/"+key+"?api_key="+Config.API_KEY);
         makeJsonImageRequest(Config.BASE_URL+"tv/" + key + "/images?api_key=" + Config.API_KEY);
         makeJsonCrewRequest(Config.BASE_URL+"tv/" + key + "/credits?api_key="+Config.API_KEY);
-        im = ImageLoader.getInstance();
+   /*     im = ImageLoader.getInstance();
         im.init(ImageLoaderConfiguration.createDefault(getApplicationContext()));
         File cacheDir = StorageUtils.getCacheDirectory(getApplicationContext(), true);
         ImageLoaderConfiguration localImageLoaderConfigurationTwo =
@@ -180,7 +180,7 @@ public class TvDetailActivity extends ActionBarActivity implements ObservableScr
         ImageLoader.getInstance().init(localImageLoaderConfigurationTwo);
 
         imPoster = ImageLoader.getInstance();
-        imPoster.init(localImageLoaderConfigurationTwo);
+        imPoster.init(localImageLoaderConfigurationTwo);*/
 
     }
 
@@ -283,9 +283,9 @@ public class TvDetailActivity extends ActionBarActivity implements ObservableScr
                 }
 
                // imPoster.displayImage("http://image.tmdb.org/t/p/w500" + movieDetails.getPosterPath(), mImageView);
-                Utils.loadImage(mImageView,Config.IMAGE_BASE_URL+movieDetails.getPosterPath());
+                Utils.loadImage(mImageView,movieDetails.getPosterPath(),7);
                 //im.displayImage("http://image.tmdb.org/t/p/w500" + movieDetails.getBackdropPath(), poster);
-                Utils.loadImage(poster, Config.IMAGE_BASE_URL + movieDetails.getBackdropPath());
+                Utils.loadImage(poster,movieDetails.getBackdropPath(),5);
                 mImageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

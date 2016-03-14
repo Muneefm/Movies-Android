@@ -92,7 +92,7 @@ public class RecycleDialogueAdapter extends RecyclerView.Adapter<RecycleDialogue
 
         if(seasons.get(position).getPosterPath()!=null){
             //im.displayImage("http://image.tmdb.org/t/p/w500"+seasons.get(position).getPosterPath().toString(), holder.poster);
-            Utils.loadImage(holder.poster, Config.IMAGE_BASE_URL+seasons.get(position).getPosterPath().toString());
+            Utils.loadImage(holder.poster, seasons.get(position).getPosterPath().toString(),2);
         }
 
 

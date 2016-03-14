@@ -80,7 +80,7 @@ public class ScrollingActivity extends AppCompatActivity {
         tagMovieRec = (TextView) findViewById(R.id.tagMovieRec);
         tagTvRec = (TextView) findViewById(R.id.tagTvRec);
 
-        pro =(CircleImageView) findViewById(R.id.imgpro);
+        pro =(CircleImageView) findViewById(R.id.imgprocir);
         ovrview = (TextView) findViewById(R.id.ovr);
         date = (TextView) findViewById(R.id.birthday);
         place = (TextView) findViewById(R.id.place);
@@ -121,7 +121,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
                 mainRel.setVisibility(View.VISIBLE);
 
-                Utils.loadImage(pro, Config.IMAGE_BASE_URL + data.getProfilePath());
+                Utils.loadImage(pro,data.getProfilePath(),4);
                 pro.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

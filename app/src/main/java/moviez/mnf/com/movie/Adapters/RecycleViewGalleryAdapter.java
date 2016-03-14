@@ -80,7 +80,7 @@ public class RecycleViewGalleryAdapter extends RecyclerView.Adapter<RecycleViewG
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
        // im.displayImage("http://image.tmdb.org/t/p/w500" + mDataset.get(position).getFilePath(), holder.image);
-        Utils.loadImage(holder.image, Config.IMAGE_BASE_URL+ mDataset.get(position).getFilePath());
+        Utils.loadImage(holder.image,  mDataset.get(position).getFilePath(),4);
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

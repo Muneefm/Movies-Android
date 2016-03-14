@@ -79,10 +79,10 @@ public class RecycleViewCastCrew extends RecyclerView.Adapter<RecycleViewCastCre
 
         holder.name.setText(mDataset.get(position).getName());
         if(mDataset.get(position).getProfilePath()!=null){
-           Utils.loadImage(holder.image, Config.IMAGE_BASE_URL + mDataset.get(position).getProfilePath());
+           Utils.loadImage(holder.image,  mDataset.get(position).getProfilePath().toString(),3);
             Log.e(TAG,"iamge url  = "+mDataset.get(position).getProfilePath() +" name = "+mDataset.get(position).getName());
         }else{
-            Utils.loadImage(holder.image, Config.IMAGE_BASE_URL);
+            Utils.loadImage(holder.image, "",3);
             Log.e(TAG,"iamge url null  = "+mDataset.get(position).getProfilePath() +" name = "+mDataset.get(position).getName());
 
         }
